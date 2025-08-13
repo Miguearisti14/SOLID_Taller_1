@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b_taller_automovil.Eventos;
+using Taller.Clases;
+using Taller.Eventos;
 
-namespace b_taller_automovil.Clases
+namespace Taller.Clases
 {
     public class Reparacion
     {
@@ -27,10 +28,10 @@ namespace b_taller_automovil.Clases
 
         public Reparacion(Carro carro, List<Repuesto> l_repuesto, List<Mecanico> l_mecanicos)
         {
-            this.Carro = carro;
-            this.Fecha = DateTime.Now;
-            this.L_repuesto = l_repuesto;
-            this.L_mecanicos = l_mecanicos;
+            Carro = carro;
+            Fecha = DateTime.Now;
+            L_repuesto = l_repuesto;
+            L_mecanicos = l_mecanicos;
 
             publicador_2 = new Publisher_VehiculoIngresado();
             //suscribir el metodo al evento
@@ -44,9 +45,9 @@ namespace b_taller_automovil.Clases
         {
             try
             {
-                if (Gasolina.Reparacion == true || 
-                    Hibrido.Reparacion == true || 
-                    Electrico.Reparacion == true) 
+                if (Gasolina.Reparacion == true ||
+                    Hibrido.Reparacion == true ||
+                    Electrico.Reparacion == true)
 
                 {
                     publicador = new Publisher_ReparacionFinalizada();
@@ -64,14 +65,14 @@ namespace b_taller_automovil.Clases
                     publicador.Informar_Reparacion_Finalizada(false);
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception("Ocurrio un error en el metodo Finalizar Reparacion");
             }
 
         }
 
-        public static float Valor { get => valor;}
+        public static float Valor { get => valor; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
         public Carro Carro { get => carro; set => carro = value; }
         public List<Repuesto> L_repuesto { get => l_repuesto; set => l_repuesto = value; }

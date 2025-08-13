@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b_taller_automovil.Interfaces;
+using Taller.Interfaces;
 
-namespace b_taller_automovil.Clases
+namespace Taller.Clases
 {
     public class Electrico : Carro
     {

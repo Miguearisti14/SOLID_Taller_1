@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace b_taller_automovil.Clases
+
+namespace Taller.Clases
 {
     public class Hibrido : Carro
     {

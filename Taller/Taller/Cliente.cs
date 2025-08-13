@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Taller.Clases;
 
-namespace b_taller_automovil.Clases
+namespace Taller.Clases
 {
     public class Cliente : Persona
     {
@@ -14,8 +15,8 @@ namespace b_taller_automovil.Clases
 
         public Cliente(int id, string nombre, string telefono, bool credito) : base(id, nombre, telefono)
         {
-            this.Credito = credito;
-            this.Saldo = 0;
+            Credito = credito;
+            Saldo = 0;
         }
 
 

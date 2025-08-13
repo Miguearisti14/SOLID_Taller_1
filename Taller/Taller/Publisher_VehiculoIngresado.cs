@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b_taller_automovil.Clases;
+using Taller.Clases;
 
-namespace b_taller_automovil.Eventos
+namespace Taller.Eventos
 {
     public class Publisher_VehiculoIngresado
     {

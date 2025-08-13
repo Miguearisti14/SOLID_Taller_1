@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b_taller_automovil.Eventos;
-using b_taller_automovil.Interfaces;
+using Taller.Eventos;
+using Taller.Interfaces;
 
-namespace b_taller_automovil.Clases
+namespace Taller
 {
     public abstract class Carro : IReparacion
     {
@@ -25,11 +25,11 @@ namespace b_taller_automovil.Clases
 
         public Carro(string placa, string marca, string modelo, int año, string dueño)
         {
-            this.Placa = placa;
-            this.Marca = marca;
-            this.Modelo = modelo;
-            this.Año = año;
-            this.Dueño = dueño;
+            Placa = placa;
+            Marca = marca;
+            Modelo = modelo;
+            Año = año;
+            Dueño = dueño;
         }
 
         public abstract string Reparacion_Puesto_Punto();

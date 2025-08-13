@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b_taller_automovil.Clases;
+using Taller.Clases;
 
-namespace b_taller_automovil.Eventos
+namespace Taller.Eventos
 {
     public class Publisher_FacturaCanceladaSalida
     {
         internal delegate void delegado_factura_salida();
         internal event delegado_factura_salida evt_factura_salida;
 
-        public void Informar_Cancelamiento_Factura_Salida(float pago)
+        public void Informar_Cancelamiento_Factura_Salida(float pago, Cliente cliente)
         {
             try
             {
                 if (evt_factura_salida != null)
                 {
                     evt_factura_salida();
-                    if (pago == Reparacion.Valor)
+                    if (cliente.Saldopendiente == 0)
                     {
                         Console.WriteLine("El pago fue procesado con exito, puede pasar a retirar su vehiculo");
                     }
