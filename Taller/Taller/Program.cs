@@ -33,7 +33,7 @@ class Program
         Console.WriteLine("\n=== PRUEBA DE PAGO A CRÉDITO ===");
         IGestor_Pago pagoCredito = new Pago_Credito();
         pagoCredito.Cancelar_Pago(200, clienteCredito, costoRepuesto); // Paga parcialmente
-        pagoCredito.Cancelar_Pago(450, clienteCredito, costoRepuesto); // Cancela la deuda
+        pagoCredito.Cancelar_Pago(650, clienteCredito, costoRepuesto); // Cancela la deuda
     }
 }
 

@@ -22,39 +22,44 @@ namespace Taller
         {
             try
             {
-                float totalDeuda = Reparacion.Valor + costoRepuesto;
-
-                // Si no tiene deuda registrada, la calculamos
+                // Asegurar que la deuda ya está registrada (solo si es estrictamente necesario)
                 if (cliente.Saldopendiente <= 0)
                 {
-                    cliente.Saldopendiente = totalDeuda;
+                    cliente.Saldopendiente = Reparacion.Valor + costoRepuesto;
                 }
 
-                // Resta el pago al saldo pendiente
-                cliente.Saldopendiente -= pago;
-
-                if (cliente.Saldopendiente > 0)
+                // Si paga más de lo que debe
+                if (pago >= cliente.Saldopendiente)
                 {
-                    // Evento de crédito actualizado (no se terminó de pagar)
-                    publisher_credito = new Publisher_CreditoActualizado();
-                    publisher_credito.evt_credito += EventHandler;
-                    publisher_credito.Informar_Credito_Actualizado();
-
-                    Console.WriteLine($"Pago parcial recibido. Saldo pendiente: {cliente.Saldopendiente}");
-
-                 
-                }
-                else
-                {
-                    // Deuda cancelada
+                    float excedente = pago - cliente.Saldopendiente;
                     cliente.Saldopendiente = 0;
+
+                    // Guardar saldo a favor si hay exceso
+                    if (excedente > 0)
+                    {
+                        cliente.Saldo += excedente;
+                        Console.WriteLine($"Pago total recibido. Excedente registrado como saldo a favor: {cliente.Saldo}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pago total recibido. No hay saldo pendiente.");
+                    }
 
                     // Evento de factura pagada
                     publisher_cancelada = new Publisher_FacturaCanceladaSalida();
                     publisher_cancelada.evt_factura_salida += EventHandler;
                     publisher_cancelada.Informar_Cancelamiento_Factura_Salida(pago, cliente);
+                }
+                else
+                {
+                    // Pago parcial
+                    cliente.Saldopendiente -= pago;
 
-                    Console.WriteLine($"Pago total recibido. La deuda ha sido cancelada.");
+                    publisher_credito = new Publisher_CreditoActualizado();
+                    publisher_credito.evt_credito += EventHandler;
+                    publisher_credito.Informar_Credito_Actualizado();
+
+                    Console.WriteLine($"Pago parcial recibido. Saldo pendiente: {cliente.Saldopendiente}");
                 }
 
                 return cliente.Saldopendiente;

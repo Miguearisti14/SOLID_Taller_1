@@ -20,35 +20,56 @@ namespace Taller
 
         public float Cancelar_Pago(float pago, Cliente cliente, float costo_repuesto)
         {
+            float totalAPagar = Reparacion.Valor + costo_repuesto;
+            float excedente = pago - totalAPagar;
 
             try
             {
-                if (pago < (Reparacion.Valor + costo_repuesto))
-                {
-                    cliente.Saldopendiente = (Reparacion.Valor + costo_repuesto) - pago;
-                    Console.WriteLine($"El pago no se pudo realizar completamente. Monto pendiente: {cliente.Saldopendiente}");
-                    return cliente.Saldopendiente; // Ajusta el saldo pendiente
 
+                // Aplicar saldo a favor existente
+                if (cliente.Saldo > 0)
+                {
+                    cliente.Saldo += pago;
+                    Console.WriteLine($"Usando saldo a favor: {cliente.Saldo}");
+                    totalAPagar -= cliente.Saldo;
+                    if (totalAPagar < 0) totalAPagar = 0; // por si el saldo cubre todo
+                    cliente.Saldo = Math.Max(cliente.Saldo - (Reparacion.Valor + costo_repuesto), 0);
+                    Console.WriteLine($"Saldo a favor restante: {cliente.Saldo}");
+
+                }
+
+
+                if (pago < totalAPagar)
+                {
+                    cliente.Saldopendiente = totalAPagar - pago;
+                    Console.WriteLine($"El pago no se pudo realizar completamente. Monto pendiente: {cliente.Saldopendiente}");
+                    return cliente.Saldopendiente;
                 }
                 else
                 {
-                    cliente.Saldopendiente = Math.Max(cliente.Saldo - pago, 0); // Deja el saldo en cero o resta lo necesario
+                    cliente.Saldopendiente = 0;  
 
-                    // Emite el evento de factura pagada si es exitoso
+                    if (excedente > 0)
+                    {
+                        cliente.Saldo += excedente; // saldo a favor
+                        Console.WriteLine($"Pago exitoso. Saldo a favor del cliente: {cliente.Saldo}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pago exitoso. No hay saldo pendiente.");
+                    }
+
                     publisher_cancelada = new Publisher_FacturaCanceladaSalida();
                     publisher_cancelada.evt_factura_salida += EventHandler;
                     publisher_cancelada.Informar_Cancelamiento_Factura_Salida(pago, cliente);
 
-                    Console.WriteLine($"El pago fue ejecutado de manera exitosa. Saldo restante: {cliente.Saldo}");
                     return cliente.Saldo;
                 }
-
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocurrio un error en el metodo Cancelar Pago" + ex.Message);
+                throw new Exception("Ocurrió un error en el método Cancelar_Pago: " + ex.Message);
             }
-
         }
     }
 }
