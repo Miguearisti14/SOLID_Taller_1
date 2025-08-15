@@ -8,17 +8,17 @@ using Taller.Interfaces;
 
 namespace Taller
 {
-    public class Carro : Vehiculo
+    public class Moto : Vehiculo
     {
         public IMotor Motor { get; }
-        public int Nro_Puertas { get; }
+        public int Cilindraje { get; }
         public string Transmision { get; }
 
-        public Carro(string placa, string marca, int modelo, Cliente dueno, IMotor motor, int nro_Puertas, string transmision)
+        public Moto(string placa, string marca, int modelo, Cliente dueno, IMotor motor, int cilindraje, string transmision)
             : base(placa, marca, modelo, dueno)
         {
             Motor = motor;
-            Nro_Puertas = nro_Puertas;
+            Cilindraje = cilindraje;
             Transmision = transmision;
 
         }

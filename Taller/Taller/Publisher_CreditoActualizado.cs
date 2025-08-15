@@ -7,12 +7,12 @@ using Taller.Clases;
 
 namespace Taller.Eventos
 {
-    public class Publisher_CreditoActualizado
+    public class Publisher_CreditoActualizado : I_EventoFacturas
     {
         internal delegate void delegado_credito();
         internal event delegado_credito evt_credito;
 
-        public void Informar_Credito_Actualizado()
+        public void informar_pago(Cliente cliente)
         {
             try
             {

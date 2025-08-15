@@ -48,7 +48,7 @@ namespace Taller
                     // Evento de factura pagada
                     publisher_cancelada = new Publisher_FacturaCanceladaSalida();
                     publisher_cancelada.evt_factura_salida += EventHandler;
-                    publisher_cancelada.Informar_Cancelamiento_Factura_Salida(pago, cliente);
+                    publisher_cancelada.informar_pago(cliente);
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace Taller
 
                     publisher_credito = new Publisher_CreditoActualizado();
                     publisher_credito.evt_credito += EventHandler;
-                    publisher_credito.Informar_Credito_Actualizado();
+                    publisher_credito.informar_pago(cliente);
 
                     Console.WriteLine($"Pago parcial recibido. Saldo pendiente: {cliente.Saldopendiente}");
                 }

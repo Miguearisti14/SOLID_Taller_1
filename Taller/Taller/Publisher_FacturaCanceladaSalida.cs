@@ -7,12 +7,12 @@ using Taller.Clases;
 
 namespace Taller.Eventos
 {
-    public class Publisher_FacturaCanceladaSalida
+    public class Publisher_FacturaCanceladaSalida : I_EventoFacturas
     {
         internal delegate void delegado_factura_salida();
         internal event delegado_factura_salida evt_factura_salida;
 
-        public void Informar_Cancelamiento_Factura_Salida(float pago, Cliente cliente)
+        public void informar_pago(Cliente cliente)
         {
             try
             {

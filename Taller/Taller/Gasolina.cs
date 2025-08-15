@@ -7,29 +7,15 @@ using System.Threading.Tasks;
 
 namespace Taller.Clases
 {
-    public class Gasolina : Carro
+    public class Gasolina : IMotor
     {
-        private int numero_cilindro;
-        private static bool reparacion;
+        public int NumeroCilindros { get; }
+        public static bool Reparacion { get; private set; }
 
-        public Gasolina(string placa, string marca, string modelo, int año, string dueño, int numero_cilindro) 
-            : base(placa, marca, modelo, año, dueño)
+        public void Encender()
         {
-            this.Numero_cilindro = numero_cilindro;
+            Console.WriteLine("Motor a gasolina encendido.");
         }
 
-        public Gasolina(string placa, string marca, string modelo, int año, string dueño)
-            : base(placa, marca, modelo, año, dueño)
-        {
-        }
-
-        public int Numero_cilindro { get => numero_cilindro; set => numero_cilindro = value; }
-        public static bool Reparacion { get => reparacion; set => reparacion = value; }
-
-        public override string Reparacion_Puesto_Punto()
-        {
-            Reparacion = true;
-            return $"Se cambiaron las correas, las bujías, se drena el radiador y se le ajustan los inyectores. ";
-        }
     }
 }

@@ -1,33 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Interfaces;
 
 namespace Taller.Clases
 {
-    public class Electrico : Carro
+    public class Electrico : IMotor
     {
-        private int autonomia;
-        private static bool reparacion;
+        public int Autonomia { get; }
+        public static bool Reparacion { get; private set; }
 
-        public Electrico(string placa, string marca, string modelo, int año, string dueño, int autonomia) 
-            : base(placa, marca, modelo, año, dueño)
+  
+        public void Encender()
         {
-            this.Autonomia = autonomia;
+            Console.WriteLine("Motor eléctrico encendido en silencio.");
         }
 
-        public Electrico(string placa, string marca, string modelo, int año, string dueño)
-            : base(placa, marca, modelo, año, dueño)
-        {
-        }
-        public int Autonomia { get => autonomia; set => autonomia = value; }
-        public static bool Reparacion { get => reparacion; set => reparacion = value; }
-        public override string Reparacion_Puesto_Punto()
-        {
-            Reparacion = true;
-            return $"Se comprobo el estado de la batería, se cambiaron los lubricantes, se examino el desgaste de las llantas, se examino la amortiguación y se cambia el líquido de frenos";
-        }
     }
 }

@@ -61,7 +61,7 @@ namespace Taller
 
                     publisher_cancelada = new Publisher_FacturaCanceladaSalida();
                     publisher_cancelada.evt_factura_salida += EventHandler;
-                    publisher_cancelada.Informar_Cancelamiento_Factura_Salida(pago, cliente);
+                    publisher_cancelada.informar_pago(cliente);
 
                     return cliente.Saldo;
                 }
