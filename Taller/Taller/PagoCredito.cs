@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Eventos;
-using Taller.Interfaces;
-using Taller.Clases;
-namespace Taller
+﻿namespace Taller
 {
-    public class Pago_Credito : IGestor_Pago
+    public class PagoCredito : IGestorPago
     {
 
-        internal static Publisher_FacturaCanceladaSalida publisher_cancelada;
-        internal static Publisher_CreditoActualizado publisher_credito;
+        internal static PublisherFacturaCanceladaSalida publisher_cancelada;
+        internal static PublisherCreditoActualizado publisher_credito;
         internal static void EventHandler()
         {
 
         }
 
-        public float Cancelar_Pago(float pago, Cliente cliente, float costoRepuesto)
+        public float CancelarPago(float pago, Cliente cliente, ReparacionBase reparacion)
         {
             try
             {
                 // Asegurar que la deuda ya está registrada (solo si es estrictamente necesario)
                 if (cliente.Saldopendiente <= 0)
                 {
-                    cliente.Saldopendiente = Reparacion.Valor + costoRepuesto;
+                    cliente.Saldopendiente = reparacion.ValorTotal;
                 }
 
                 // Si paga más de lo que debe
@@ -46,7 +38,7 @@ namespace Taller
                     }
 
                     // Evento de factura pagada
-                    publisher_cancelada = new Publisher_FacturaCanceladaSalida();
+                    publisher_cancelada = new PublisherFacturaCanceladaSalida();
                     publisher_cancelada.evt_factura_salida += EventHandler;
                     publisher_cancelada.informar_pago(cliente);
                 }
@@ -55,7 +47,7 @@ namespace Taller
                     // Pago parcial
                     cliente.Saldopendiente -= pago;
 
-                    publisher_credito = new Publisher_CreditoActualizado();
+                    publisher_credito = new PublisherCreditoActualizado();
                     publisher_credito.evt_credito += EventHandler;
                     publisher_credito.informar_pago(cliente);
 

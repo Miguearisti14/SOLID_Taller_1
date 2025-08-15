@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public interface I_EventoFacturas
+    public interface IEventoFactura
     {
         void informar_pago(Cliente cliente);
 

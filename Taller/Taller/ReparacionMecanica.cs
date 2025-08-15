@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-using Taller.Eventos;
-
-namespace Taller
+﻿namespace Taller
 {
     public class ReparacionMecanica : ReparacionBase
     {
         private const float PrecioBase = 130;
 
-        public ReparacionMecanica(Carro carro, IGestorRepuestos gestorRepuestos, List<Mecanico> mecanicos)
+        public ReparacionMecanica(Carro carro, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
             : base(carro, gestorRepuestos, mecanicos) { }
 
         public override float ValorTotal => PrecioBase + (float)gestorRepuestos.CalcularTotalRepuestos();
@@ -20,8 +12,9 @@ namespace Taller
         public override void FinalizarReparacion()
         {
             ReparacionCompletada = true;
-            publicadorFinal = new Publisher_ReparacionFinalizada();
-            publicadorFinal.Informar_Reparacion_Finalizada(true);
+            publicadorFinal = new PublisherReparacionFinalizada();
+            publicadorFinal.evt_reparacion += EventHandler;
+            publicadorFinal.informarReparacion(true);
         }
 
         public static bool ReparacionCompletada { get; private set; }

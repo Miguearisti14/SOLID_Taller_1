@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-
-namespace Taller.Eventos
+﻿namespace Taller
 {
-    public class Publisher_VehiculoIngresado
+    public class PublisherVehiculoIngresado : IEventoReparacion
     {
         internal delegate void delegado_ingreso();
         internal event delegado_ingreso evt_ingreso;
 
-        public void Informar_Ingreso_Vehiculo(bool carro)
+        public void informarReparacion(bool carro)
         {
             try
             {

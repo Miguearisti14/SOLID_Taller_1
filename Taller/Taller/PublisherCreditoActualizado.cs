@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-
-namespace Taller.Eventos
+﻿namespace Taller
 {
-    public class Publisher_CreditoActualizado : I_EventoFacturas
+    public class PublisherCreditoActualizado : IEventoFactura
     {
         internal delegate void delegado_credito();
         internal event delegado_credito evt_credito;

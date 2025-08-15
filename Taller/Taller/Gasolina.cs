@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Taller.Clases
+namespace Taller
 {
     public class Gasolina : IMotor
     {

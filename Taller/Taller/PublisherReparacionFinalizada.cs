@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-
-namespace Taller.Eventos
+﻿namespace Taller
 {
-    public class Publisher_ReparacionFinalizada
+    public class PublisherReparacionFinalizada : IEventoReparacion
     {
         internal delegate void delegado_reparacion();
         internal event delegado_reparacion evt_reparacion;
 
-        public void Informar_Reparacion_Finalizada(bool final)
+        public void informarReparacion(bool final)
         {
             try
             {

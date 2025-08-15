@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-
-namespace Taller.Eventos
+﻿namespace Taller
 {
-    public class Publisher_FacturaCanceladaSalida : I_EventoFacturas
+    public class PublisherFacturaCanceladaSalida : IEventoFactura
     {
         internal delegate void delegado_factura_salida();
         internal event delegado_factura_salida evt_factura_salida;

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    internal interface IReparaciones
+    public interface IEventoReparacion
     {
-        void FinalizarReparacion();
+        void informarReparacion(bool parametro);
+
     }
 }

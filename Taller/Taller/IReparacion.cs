@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Taller.Interfaces
+namespace Taller
 {
-    public interface IReparacion
+    internal interface IReparacion
     {
-        string Reparacion_Puesto_Punto();
-
-
+        void FinalizarReparacion();
     }
 }

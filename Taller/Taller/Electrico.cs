@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Taller.Clases
+namespace Taller
 {
     public class Electrico : IMotor
     {

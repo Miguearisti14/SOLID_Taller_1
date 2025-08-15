@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taller.Clases;
-
-namespace Taller
+﻿namespace Taller
 {
-    public class GestorRepuestos : IGestorRepuestos
+    public class GestorRepuesto : IGestorRepuesto
     {
         private readonly List<Repuesto> _repuestos;
 
-        public GestorRepuestos(List<Repuesto> repuestosIniciales = null)
+        public GestorRepuesto(List<Repuesto> repuestosIniciales = null)
         {
             _repuestos = repuestosIniciales ?? new List<Repuesto>();
         }
