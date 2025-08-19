@@ -109,7 +109,7 @@ namespace Taller
             Console.WriteLine("\nCliente paga a crédito...");
 
             pagoCredito.CancelarPago(
-                pago: 150,   // monto que entrega ahora (abono)
+                pago: 150,   
                 cliente: cliente2,
                 reparacion: reparacion2
             );
