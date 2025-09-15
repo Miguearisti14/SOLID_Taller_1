@@ -8,6 +8,6 @@ namespace Taller
 {
     public abstract class ReparacionFactory
     {
-        internal abstract IReparacion CrearReparacion(Vehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos);
+        internal abstract IReparacion CrearReparacion(IVehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos);
     }
 }

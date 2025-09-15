@@ -13,3 +13,18 @@ C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Taller\Taller\Taller\o
 C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Taller\Taller\Taller\obj\Debug\net8.0\Taller.pdb
 C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Taller\Taller\Taller\obj\Debug\net8.0\Taller.genruntimeconfig.cache
 C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Taller\Taller\Taller\obj\Debug\net8.0\ref\Taller.dll
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\bin\Debug\net8.0\Taller.exe
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\bin\Debug\net8.0\Taller.deps.json
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\bin\Debug\net8.0\Taller.runtimeconfig.json
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\bin\Debug\net8.0\Taller.dll
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\bin\Debug\net8.0\Taller.pdb
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.AssemblyInfoInputs.cache
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.AssemblyInfo.cs
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.csproj.CoreCompileInputs.cache
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.sourcelink.json
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.dll
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\refint\Taller.dll
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.pdb
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\Taller.genruntimeconfig.cache
+C:\Users\MIGUEL\Documents\6to Semestre\Arquitectura de SW\Proyecto del curso\Taller\Taller\obj\Debug\net8.0\ref\Taller.dll

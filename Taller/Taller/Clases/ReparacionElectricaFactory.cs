@@ -8,7 +8,7 @@ namespace Taller.Clases
 {
     public class ReparacionElectricaFactory : ReparacionFactory
     {
-        internal override IReparacion CrearReparacion(Vehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
+        internal override IReparacion CrearReparacion(IVehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
         {
             return new ReparacionElectrico(vehiculo, gestorRepuestos, mecanicos);
         }

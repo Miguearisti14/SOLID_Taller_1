@@ -4,7 +4,7 @@
     {
         private const float PrecioBase = 150;
 
-        public ReparacionElectrico(Vehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
+        public ReparacionElectrico(IVehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
             : base(vehiculo, gestorRepuestos, mecanicos) { }
 
         public override float ValorTotal => PrecioBase + (float)gestorRepuestos.CalcularTotalRepuestos();
