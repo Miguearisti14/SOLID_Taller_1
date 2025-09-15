@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public class AireAcondicionado : VehiculoDecorator
+    public class SonidoEstereo : LujoDecorator
     {
-        public AireAcondicionado(IVehiculo vehiculo) : base(vehiculo) { }
+        public SonidoEstereo(IVehiculo vehiculo) : base(vehiculo) { }
 
         public override string Descripcion()
         {
-            return base.Descripcion() + " + Aire Acondicionado";
+            return base.Descripcion() + " + Sonido Estéreo";
         }
 
     }
-
 }

@@ -37,23 +37,18 @@ namespace Taller
         };
             IGestorRepuesto gestorRepuesto = new GestorRepuesto(repuestos);
 
-            // Fachada
-            var gestor = new GestorServicios();
+            var servicioHandler = new ServicioHandler();
 
-            // Solicitudes
-            Console.WriteLine("\n---- REPARACIÓN MECÁNICA ----");
-            carro = gestor.AtenderSolicitud("Mecanica", carro, Tuple.Create(gestorRepuesto, mecanicos));
+            // Reparación mecánica
+            carro = servicioHandler.Handle("Mecanica", carro, Tuple.Create(gestorRepuesto, mecanicos));
 
-            Console.WriteLine("\n---- LUJO (Aire acondicionado) ----");
-            carro = gestor.AtenderSolicitud("Lujo", carro, "Aire");
+            // Lujo: aire acondicionado
+            carro = servicioHandler.Handle("Aire", carro, null);
+            
+            // Lujo: sonido estéreo
+            carro = servicioHandler.Handle("Sonido", carro, null);
 
-            Console.WriteLine("\n---- LUJO (Sonido estéreo) ----");
-            carro = gestor.AtenderSolicitud("Lujo", carro, "Sonido");
-
-            // Resultado final
-            Console.WriteLine($"\nVehículo final con servicios: {carro.Descripcion()}");
-
-            Console.WriteLine("\n//////////////////////////////////////////////////////////");
+            Console.WriteLine($"\n Vehículo final: {carro.Descripcion()}");
         }
     }
     }

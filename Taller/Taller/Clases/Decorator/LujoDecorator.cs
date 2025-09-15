@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public abstract class VehiculoDecorator : IVehiculo
+    public abstract class LujoDecorator : IVehiculo
     {
         protected IVehiculo vehiculo;
 
-        protected VehiculoDecorator(IVehiculo vehiculo)
+        protected LujoDecorator(IVehiculo vehiculo)
         {
             this.vehiculo = vehiculo;
         }
