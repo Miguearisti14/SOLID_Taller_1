@@ -9,7 +9,7 @@ namespace Taller
         {
             Console.WriteLine("/////////////////////// TALLER ///////////////////////");
 
-            // 1️⃣ Cliente y vehículo
+            // 1️⃣ Crear cliente y vehículo
             Cliente cliente = new Cliente(1, "Juan Pérez", "3001234567", credito: false);
             IMotor motor = new Gasolina();
             IVehiculo carro = new Carro(
@@ -22,35 +22,43 @@ namespace Taller
                 motor: motor
             );
 
-            // 2️⃣ Mecánicos
+            // 2️⃣ Crear mecánicos
             var mecanicos = new List<Mecanico>
         {
             new Mecanico(1, "Pedro Gómez", "3011111111", "Motor"),
-            new Mecanico(2, "Luis Martínez", "3022222222", "Eléctrico")
+            new Mecanico(2, "Luis Martínez", "3022222222", "Transmisión")
         };
 
-            // 3️⃣ Repuestos
+            // 3️⃣ Crear repuestos
             var repuestos = new List<Repuesto>
         {
-            new Repuesto("Bujía", "ProveedorX", DateTime.Now, 150m),
-            new Repuesto("Filtro aceite", "ProveedorY", DateTime.Now, 100m)
+            new Repuesto("Filtro aceite", "ProveedorX", DateTime.Now, 100m),
+            new Repuesto("Bujías", "ProveedorY", DateTime.Now, 200m)
         };
             IGestorRepuesto gestorRepuesto = new GestorRepuesto(repuestos);
 
-            var servicioHandler = new ServicioHandler();
+            // 4️⃣ Crear reparación mecánica
+            ReparacionBase reparacion = new ReparacionMecanica(carro, gestorRepuesto, mecanicos);
 
-            // Reparación mecánica
-            carro = servicioHandler.Handle("Mecanica", carro, Tuple.Create(gestorRepuesto, mecanicos));
+            Console.WriteLine($"Estado inicial de la reparación: {reparacion.EstadoActual()}");
 
-            // Lujo: aire acondicionado
-            carro = servicioHandler.Handle("Aire", carro, null);
-            
-            // Lujo: sonido estéreo
-            carro = servicioHandler.Handle("Sonido", carro, null);
+            // 5️⃣ Simular proceso de la reparación usando STATE
+            reparacion.AvanzarEstado(); // Pendiente → En Progreso
+            Console.WriteLine($"Estado actual: {reparacion.EstadoActual()}");
 
-            Console.WriteLine($"\n Vehículo final: {carro.Descripcion()}");
+            reparacion.AvanzarEstado(); // En Progreso → Completada
+            Console.WriteLine($"Estado actual: {reparacion.EstadoActual()}");
+
+            reparacion.AvanzarEstado(); // Completada → No avanza
+            Console.WriteLine($"Estado actual: {reparacion.EstadoActual()}");
+
+            // 6️⃣ Mostrar descripción final del vehículo
+            Console.WriteLine($"\nVehículo final: {carro.Descripcion()}");
+
+            Console.WriteLine("//////////////////////////////////////////////////////////");
         }
     }
-    }
+
+}
 
 

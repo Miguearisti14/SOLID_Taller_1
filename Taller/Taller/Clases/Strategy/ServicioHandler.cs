@@ -18,8 +18,8 @@ namespace Taller
         {
             { "Mecanica", new ReparacionMecanicaStrategy() },
             { "Electrico", new ReparacionElectricaStrategy() },
-            { "Sonido", new LujoSonidoEstereo() },
-            { "Aire", new LujoAireAcondicionado() }
+            { "Sonido", new LujoSonidoEstereoStrategy() },
+            { "Aire", new LujoAireAcondicionadoStrategy() }
         };
         }
 
