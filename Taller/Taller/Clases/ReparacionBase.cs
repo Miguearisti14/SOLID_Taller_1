@@ -4,7 +4,7 @@
     {
         public abstract float ValorTotal { get; }
 
-        public Carro Carro { get; protected set; }
+        public Vehiculo Vehiculo{ get; protected set; }
         public DateTime Fecha { get; protected set; }
         public List<Mecanico> Mecanicos { get; protected set; }
         public string ResultadoPuestaPunto { get; set; }
@@ -13,9 +13,9 @@
         protected PublisherReparacionFinalizada publicadorFinal;
         protected PublisherVehiculoIngresado publicadorIngreso;
 
-        protected ReparacionBase(Carro carro, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
+        protected ReparacionBase(Vehiculo vehiculo, IGestorRepuesto gestorRepuestos, List<Mecanico> mecanicos)
         {
-            Carro = carro;
+            Vehiculo = vehiculo;
             this.gestorRepuestos = gestorRepuestos;
             Mecanicos = mecanicos;
             Fecha = DateTime.Now;

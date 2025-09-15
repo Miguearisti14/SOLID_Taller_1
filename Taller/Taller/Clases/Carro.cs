@@ -14,6 +14,11 @@
             Transmision = transmision;
 
         }
+
+        public override string Descripcion()
+        {
+            return $"Carro {Marca} con placa {Placa}";
+        }
     }
 
 }

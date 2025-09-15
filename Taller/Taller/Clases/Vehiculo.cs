@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public abstract class Vehiculo
+    public abstract class Vehiculo:IVehiculo
     {
         protected string Placa { get; }
         protected string Marca { get; }
@@ -21,5 +21,7 @@ namespace Taller
             Dueno = dueno;
 
         }
+
+        public abstract string Descripcion();
     }
 }
