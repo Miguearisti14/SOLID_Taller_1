@@ -8,7 +8,7 @@ namespace Taller
 {
     public abstract class Vehiculo:IVehiculo
     {
-        protected string Placa { get; }
+        public string Placa { get; }
         protected string Marca { get; }
         protected int Modelo { get; }
         protected Cliente Dueno { get; }

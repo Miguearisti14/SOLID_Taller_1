@@ -9,14 +9,6 @@
 
         public override float ValorTotal => PrecioBase + (float)gestorRepuestos.CalcularTotalRepuestos();
 
-        public override void FinalizarReparacion()
-        {
-            ReparacionCompletada = true;
-            publicadorFinal = new PublisherReparacionFinalizada();
-            publicadorFinal.evt_reparacion += EventHandler;
-            publicadorFinal.informarReparacion(true);
-        }
-
         public static bool ReparacionCompletada { get; private set; }
     }
 }

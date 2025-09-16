@@ -10,7 +10,6 @@ namespace Taller
     {
         public void Avanzar(ReparacionBase reparacion)
         {
-            Console.WriteLine("La reparación ha comenzado.");
             reparacion.SetEstado(new EstadoEnProgreso());
         }
 

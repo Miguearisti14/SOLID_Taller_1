@@ -14,11 +14,7 @@ namespace Taller
             var info = (Tuple<IGestorRepuesto, List<Mecanico>>)data;
             var reparacion = new ReparacionElectrico(vehiculo, info.Item1, info.Item2);
 
-            reparacion.IniciarReparacion();
-            reparacion.FinalizarReparacion();
-
-
-            
+                                
             return vehiculo;
         }
     }

@@ -13,11 +13,7 @@ namespace Taller.Clases
         {
             var info = (Tuple<IGestorRepuesto, List<Mecanico>>)data;
             var reparacion = new ReparacionMecanica(vehiculo, info.Item1, info.Item2);
-
-            reparacion.IniciarReparacion();
-            reparacion.FinalizarReparacion();
-
-            
+           
         
             return vehiculo;
         }

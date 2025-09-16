@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    internal interface IReparacion
+    public interface IObservador
     {
-        
+        void Actualizar(string mensaje);
     }
+
 }
