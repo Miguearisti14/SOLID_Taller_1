@@ -27,6 +27,11 @@ namespace Taller
                 Notificar(this, $"Pago completo registrado para {cliente.Nombre}");
             else
                 Notificar(this, $"Pago parcial registrado para {cliente.Nombre}. Pendiente {saldoPendiente}");
+            
+            if (cliente.Saldo > 0)
+            {
+                Console.WriteLine($"Cliente {cliente.Nombre} tiene un saldo a favor de: {cliente.Saldo}");
+            }
         }
     }
 }

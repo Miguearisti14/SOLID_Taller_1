@@ -14,12 +14,12 @@ namespace Taller
 
         public void Actualizar(ReparacionBase sujeto, string mensaje)
         {
-            Console.WriteLine($"👤 Cliente {nombre} notificado: {mensaje}");
+            Console.WriteLine($"Cliente {nombre} notificado: {mensaje}");
         }
 
         public void Actualizar(PagoService sujeto, string mensaje)
         {
-            Console.WriteLine($"👤 Cliente {nombre} notificado (pago): {mensaje}");
+            Console.WriteLine($"Cliente {nombre} notificado (pago): {mensaje}");
         }
     }
 }

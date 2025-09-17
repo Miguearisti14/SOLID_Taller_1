@@ -10,12 +10,12 @@ namespace Taller
     {
         public void Actualizar(ReparacionBase sujeto, string mensaje)
         {
-            Console.WriteLine($"🛠️ Supervisor recibe alerta de reparación: {mensaje}");
+            Console.WriteLine($"Supervisor recibe alerta de reparación: {mensaje}");
         }
 
         public void Actualizar(PagoService sujeto, string mensaje)
         {
-            Console.WriteLine($"📊 Supervisor recibe alerta de pago: {mensaje}");
+            Console.WriteLine($"Supervisor recibe alerta de pago: {mensaje}");
         }
     }
 }

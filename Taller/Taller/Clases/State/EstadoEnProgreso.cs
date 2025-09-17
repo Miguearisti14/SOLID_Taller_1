@@ -11,6 +11,7 @@ namespace Taller
         public void Avanzar(ReparacionBase reparacion)
         {
             reparacion.SetEstado(new EstadoCompletada());
+
         }
 
         public string GetEstado() => "En Progreso";

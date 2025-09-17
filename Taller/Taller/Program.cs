@@ -3,76 +3,124 @@ using System.Collections.Generic;
 
 namespace Taller
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            // =============================
-            // 🔹 1. Crear cliente y vehículo
-            // =============================
-            Cliente cliente = new Cliente(1, "Juan Pérez", "3001234567", credito: false);
-            IMotor motor = new Gasolina();
-            IVehiculo carro = new Carro("AAA111", "Mazda", 2022, cliente, motor, 4, "Manual");
+            Console.WriteLine("=== Iniciando pruebas del Taller ===\n");
 
-            // =============================
-            // 🔹 2. Crear mecánicos y repuestos
-            // =============================
-            var mecanicos = new List<Mecanico> { new Mecanico(1, "Pedro", "3011111111", "Motor") };
-            var repuestos = new List<Repuesto> { new Repuesto("Filtro aceite", "ProveedorX", DateTime.Now, 100m) };
-            IGestorRepuesto gestor = new GestorRepuesto(repuestos);
+            // 1. Pruebas de clientes y mecánicos
+            var (cliente1, cliente2, mecanicos) = InicializarPersonas();
 
-            // =============================
-            // 🔹 3. Crear reparación (State + Observer)
-            // =============================
-            ReparacionBase reparacion = new ReparacionMecanica(carro, gestor, mecanicos);
+            // 2. Pruebas de vehículos
+            var (carro1, moto1) = InicializarVehiculos(cliente1, cliente2);
 
-            // Agregar observadores de reparación
-            reparacion.AgregarObservador(new ClienteObservador(cliente.Nombre));
-            reparacion.AgregarObservador(new SupervisorObservador());
+            Console.WriteLine(carro1.Descripcion());
+            Console.WriteLine(moto1.Descripcion());
 
-            // Simular flujo de reparación
-            Console.WriteLine("\n=== 🔧 Flujo de reparación ===");
-            reparacion.AvanzarEstado();
-            reparacion.AvanzarEstado();
-            reparacion.AvanzarEstado(); // No avanza más, pero igual notifica
+            // 3. Pruebas de aplicación de lujos
+            carro1 = ProbarLujos(carro1);
 
-            // =============================
-            // 🔹 4. Etapa de pagos (Command + Observer)
-            // =============================
-            Console.WriteLine("\n=== 💰 Etapa de pagos ===");
+            Console.WriteLine("Vehículo con lujos: " + carro1.Descripcion());
 
-            // Crear servicio de pagos y agregar observadores
+            // 4. Pruebas de reparación mecánica y observadores usando Factory
+            var reparacionMec = ProbarReparacionMecanica(carro1, mecanicos, cliente1);
+
+            // 5. Pruebas de avance de estados
+            ProbarEstados(reparacionMec);
+
+            // 6. Pruebas de pagos
+            ProbarPagos(cliente1, reparacionMec);
+
+            Console.WriteLine("\n=== Fin de pruebas ===");
+        }
+
+        private static (Cliente, Cliente, List<Mecanico>) InicializarPersonas()
+        {
+            var cliente1 = new Cliente(1, "Daniela", "3001234567", credito: true);
+            var cliente2 = new Cliente(2, "Carlos", "3019876543", credito: false);
+
+            var mecanicos = new List<Mecanico>
+            {
+                new Mecanico(1, "Juan", "3201234567", "Mecánica"),
+                new Mecanico(2, "Pedro", "3101112222", "Eléctrica")
+            };
+
+            return (cliente1, cliente2, mecanicos);
+        }
+
+        private static (IVehiculo, IVehiculo) InicializarVehiculos(Cliente cliente1, Cliente cliente2)
+        {
+            IVehiculo carro1 = new Carro("ABC123", "Toyota", 2020, cliente1, new Gasolina(), 4, "Manual");
+            IVehiculo moto1 = new Moto("XYZ987", "Yamaha", 2022, cliente2, new Electrico(), 200, "Automática");
+            return (carro1, moto1);
+        }
+
+        private static IVehiculo ProbarLujos(IVehiculo carro)
+        {
+            ServicioHandler handler = new ServicioHandler();
+            carro = handler.Handle("Aire", carro, null);
+            carro = handler.Handle("Sonido", carro, null);
+            return carro;
+        }
+
+        // Usar el factory definido en el proyecto para reparación mecánica
+        private static ReparacionBase ProbarReparacionMecanica(IVehiculo carro, List<Mecanico> mecanicos, Cliente cliente)
+        {
+            IGestorRepuesto gestorRepuestos = new GestorRepuesto(new List<Repuesto>
+            {
+                new Repuesto("Filtro de aceite", "Proveedor1", DateTime.Now, 50),
+                new Repuesto("Bujía", "Proveedor2", DateTime.Now, 30)
+            });
+
+            ReparacionFactory factory = new ReparacionMecanicaFactory();
+            IReparacion reparacion = factory.CrearReparacion(carro, gestorRepuestos, mecanicos);
+
+            // Cast para acceder a métodos de observador y estado
+            ReparacionBase reparacionBase = reparacion as ReparacionBase;
+
+            var clienteObs = new ClienteObservador(cliente.Nombre);
+            var supervisorObs = new SupervisorObservador();
+
+            reparacionBase.AgregarObservador(clienteObs);
+            reparacionBase.AgregarObservador(supervisorObs);
+
+            return reparacionBase;
+        }
+
+        private static void ProbarEstados(ReparacionBase reparacionMec)
+        {
+            Console.WriteLine("\n--- Avanzando reparación ---");
+            Console.WriteLine("Estado actual: " + reparacionMec.EstadoActual());
+            reparacionMec.AvanzarEstado();
+            Console.WriteLine("Estado actual: " + reparacionMec.EstadoActual());
+            reparacionMec.AvanzarEstado();
+            Console.WriteLine("Estado actual: " + reparacionMec.EstadoActual());
+            reparacionMec.AvanzarEstado();
+        }
+
+        private static void ProbarPagos(Cliente cliente, ReparacionBase reparacionMec)
+        {
             PagoService pagoService = new PagoService();
-            pagoService.AgregarObservador(new ClienteObservador(cliente.Nombre));
-            pagoService.AgregarObservador(new SupervisorObservador());
+            var clienteObs = new ClienteObservador(cliente.Nombre);
+            var supervisorObs = new SupervisorObservador();
 
-            // Crear invoker
+            pagoService.AgregarObservador(clienteObs);
+            pagoService.AgregarObservador(supervisorObs);
+
             GestorPagosInvoker invoker = new GestorPagosInvoker();
 
-            // 🔸 Escenario 1: Pago de contado (exitoso, cliente paga 600 por un total de 500)
-            IGestorPago pagoContado = new PagoContado();
-            ICommand comandoContado = new PagoContadoCommand(pagoContado, cliente, reparacion, 600);
+            Console.WriteLine("\n--- PROBANDO PAGOS ---");
+            var pagoContado = new PagoContado();
+            ICommand pagoContadoCmd = new PagoContadoCommand(pagoContado, cliente, reparacionMec, 100, pagoService);
+            invoker.EjecutarPago(pagoContadoCmd);
 
-            Console.WriteLine("\n--- Pago contado ---");
-            invoker.EjecutarPago(comandoContado);
-            pagoService.ProcesarPago(pagoContado, 600, cliente, reparacion);
+            var pagoCredito = new PagoCredito();
+            ICommand pagoCreditoCmd = new PagoCreditoCommand(pagoCredito, cliente, reparacionMec, 50, pagoService);
+            invoker.EjecutarPago(pagoCreditoCmd);
 
-            // 🔸 Escenario 2: Pago a crédito (cliente abona solo una parte)
-            IGestorPago pagoCredito = new PagoCredito();
-            ICommand comandoCredito1 = new PagoCreditoCommand(pagoCredito, cliente, reparacion, 200);
-
-            Console.WriteLine("\n--- Pago crédito parcial ---");
-            invoker.EjecutarPago(comandoCredito1);
-            pagoService.ProcesarPago(pagoCredito, 200, cliente, reparacion);
-
-            // 🔸 Escenario 3: Cliente termina de pagar el crédito
-            ICommand comandoCredito2 = new PagoCreditoCommand(pagoCredito, cliente, reparacion, 300);
-
-            Console.WriteLine("\n--- Pago crédito final ---");
-            invoker.EjecutarPago(comandoCredito2);
-            pagoService.ProcesarPago(pagoCredito, 300, cliente, reparacion);
-
-            Console.WriteLine("\n=== ✅ Flujo finalizado ===");
+            ICommand pagoCreditoCmd2 = new PagoCreditoCommand(pagoCredito, cliente, reparacionMec, 200, pagoService);
+            invoker.EjecutarPago(pagoCreditoCmd2);
         }
     }
 }

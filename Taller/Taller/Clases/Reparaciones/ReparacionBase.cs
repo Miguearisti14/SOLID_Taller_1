@@ -35,6 +35,11 @@
             estado.Avanzar(this);
             Notificar(this, $"Estado cambiado a: {estado.GetType().Name}");
 
+            if (estado.GetEstado().Equals("Completada", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"Reparación completada. Valor total: {ValorTotal}");
+            }
+
         }
         public void AgregarObservador(IObservador<ReparacionBase> obs) => observadores.Add(obs);
         public void QuitarObservador(IObservador<ReparacionBase> obs) => observadores.Remove(obs);

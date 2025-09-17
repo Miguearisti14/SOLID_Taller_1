@@ -12,19 +12,21 @@ namespace Taller
         private readonly Cliente Cliente;
         private readonly ReparacionBase Reparacion;
         private readonly float Monto;
+        private readonly PagoService PagoService;
 
-        public PagoCreditoCommand(IGestorPago gestor, Cliente cliente, ReparacionBase reparacion, float monto)
+        public PagoCreditoCommand(IGestorPago gestor, Cliente cliente, ReparacionBase reparacion, float monto, PagoService pagoService)
         {
             Gestor = gestor;
             Cliente = cliente;
             Reparacion = reparacion;
             Monto = monto;
+            PagoService = pagoService;
         }
 
         public void Execute()
         {
-            Console.WriteLine("=== Ejecutando pago a CRÉDITO ===");
-            Gestor.CancelarPago(Monto, Cliente, Reparacion);
+            
+            PagoService.ProcesarPago(Gestor, Monto, Cliente, Reparacion);
         }
 
     }
