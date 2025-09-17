@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public interface IObservador
+    public interface IObservador<T>
     {
-        void Actualizar(string mensaje);
+        void Actualizar(T sujeto, string mensaje);
     }
+
 
 }

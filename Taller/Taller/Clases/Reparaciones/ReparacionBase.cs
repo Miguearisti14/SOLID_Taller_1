@@ -1,6 +1,6 @@
 ﻿namespace Taller
 {
-    public abstract class ReparacionBase : IReparacion, IPublisher
+    public abstract class ReparacionBase : IReparacion, IPublisher<ReparacionBase>
     {
         public abstract float ValorTotal { get; }
         public IEstadoReparacion estado { get; protected set; }
@@ -8,7 +8,7 @@
         public DateTime Fecha { get; protected set; }
         public List<Mecanico> Mecanicos { get; protected set; }
         public string ResultadoPuestaPunto { get; set; }
-        private readonly List<IObservador> observadores = new();
+        private readonly List<IObservador<ReparacionBase>> observadores = new();
         protected IGestorRepuesto gestorRepuestos;
 
 
@@ -33,17 +33,15 @@
         public void AvanzarEstado()
         {
             estado.Avanzar(this);
-            Notificar($"Reparación del {Vehiculo.Descripcion()} ahora está en estado: {estado.GetEstado()}");
+            Notificar(this, $"Estado cambiado a: {estado.GetType().Name}");
 
         }
-        public void AgregarObservador(IObservador observador) => observadores.Add(observador);
-        public void QuitarObservador(IObservador observador) => observadores.Remove(observador);
-        public void Notificar(string mensaje)
+        public void AgregarObservador(IObservador<ReparacionBase> obs) => observadores.Add(obs);
+        public void QuitarObservador(IObservador<ReparacionBase> obs) => observadores.Remove(obs);
+        public void Notificar(ReparacionBase sujeto, string mensaje)
         {
             foreach (var obs in observadores)
-            {
-                obs.Actualizar(mensaje);
-            }
+                obs.Actualizar(sujeto, mensaje);
         }
 
     }

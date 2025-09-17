@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 
 namespace Taller
 {
-    public class ClienteObservador : IObservador
+    public class ClienteObservador : IObservador<ReparacionBase>, IObservador<PagoService>
     {
-        private string Nombre;
-        public ClienteObservador(string nombre) { Nombre = nombre; }
+        private readonly string nombre;
 
-        public void Actualizar(string mensaje)
+        public ClienteObservador(string nombre) => this.nombre = nombre;
+
+        public void Actualizar(ReparacionBase sujeto, string mensaje)
         {
-            Console.WriteLine($"[Cliente {Nombre}] Notificación: {mensaje}");
+            Console.WriteLine($"👤 Cliente {nombre} notificado: {mensaje}");
+        }
+
+        public void Actualizar(PagoService sujeto, string mensaje)
+        {
+            Console.WriteLine($"👤 Cliente {nombre} notificado (pago): {mensaje}");
         }
     }
 }
